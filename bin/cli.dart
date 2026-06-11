@@ -1,38 +1,37 @@
 import 'dart:io';
 
-// const name = 'Michael';
-
 void main(List<String> arguments) {
   if (arguments.isEmpty || arguments.first == 'help') {
     printUsage();
-  } else if (arguments.first == 'greet') {
+  } else if (arguments.first == 'weather') {
     // use 2nd arg or default as name
     // print(arguments.sublist(1).first);
-    final String? fName = arguments.length > 1 ? arguments[1] : null;
-    greetPerson(fName);
+    final String? location = arguments.length > 1 ? arguments[1] : null;
+    getWeather(location);
   } else {
     printUsage();
   }
 }
 
 void printUsage() {
-  print("Usage: reply with 'help', or 'greet {name}'");
+  print("Usage: reply with 'help', or 'weather {location}'");
 }
 
-void greetPerson(String? name) {
-  final String inputName;
+void getWeather(String? location) {
+  final String inputLocation;
 
-  if (name == null) {
-    print("Please input a name:");
-    inputName = stdin.readLineSync() ?? '';
+  if (location == null) {
+    print("Please input a location:");
+    inputLocation = stdin.readLineSync() ?? '';
 
-    if (inputName.isEmpty) {
-      greetPerson(null);
+    if (inputLocation.isEmpty) {
+      getWeather(null);
       return;
     }
   } else {
-    inputName = name;
+    inputLocation = location;
   }
 
-  print('Hello: $inputName!');
+  print('One sec. Getting weather data...');
+  print('The weather in $inputLocation is sunny!');
 }
