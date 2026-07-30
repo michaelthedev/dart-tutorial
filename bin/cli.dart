@@ -40,17 +40,18 @@ void getWeather(String? location) async {
 }
 
 Future<String> fetchWeatherData(String location) async {
-  final response = await http.get(
-      Uri.http(
-        'api.weatherapi.com',
-        '/v1/current.json',
-        {'key': '', 'q': location},
-      )
-  );
+  final response = await http.get(Uri.http(
+    'api.weatherapi.com',
+    '/v1/current.json',
+    {'key': '', 'q': location},
+  ));
+
+  print("Wouldn't you like to know, weather boy 😂");
 
   if (response.statusCode == 200) {
     return response.body;
   } else {
-    throw Exception('Failed to load weather data. Status code: ${response.statusCode}');
+    throw Exception(
+        'Failed to load weather data. Status code: ${response.statusCode}, ${response.body}');
   }
 }
