@@ -1,19 +1,13 @@
 import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:command_runner/command_runner.dart';
 
-void main(List<String> arguments) {
-  if (arguments.isEmpty || arguments.first == 'help') {
-    printUsage();
-  } else if (arguments.first == 'weather') {
-    // use 2nd arg or default as name
-    // print(arguments.sublist(1).first);
-    final String? location = arguments.length > 1 ? arguments[1] : null;
-    getWeather(location);
-  } else {
-    printUsage();
-  }
+void main(List<String> arguments) async {
+  var runner = CommandRunner();
+  await runner.run(arguments);
 }
 
+// obsolete from here
 void printUsage() {
   print("Usage: reply with 'help', or 'weather {location}'");
 }
